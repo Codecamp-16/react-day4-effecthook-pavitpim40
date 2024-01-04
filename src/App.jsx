@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
 // App.jsx
-export default function App() {
-  useEffect(() => {
-    alert('After render');
-  }, []);
+import { useState } from 'react';
+import DogImage from './components/DogImage';
 
-  alert('Before render');
-  // สิ่งที่ FC Return == สิ่งที่ Render
-  return <main>Hello, React</main>;
+export default function App() {
+  const [isShow, setIsShow] = useState(false);
+  return (
+    <main>
+      {isShow ? <DogImage /> : null}
+      <button onClick={() => setIsShow((cur) => !cur)}>toggle image</button>
+    </main>
+  );
 }
