@@ -7,7 +7,7 @@ import useUser from './useUser';
 
 function App() {
   // ตัว App กำลัง subscribe ค่า user จาก useUser
-  const { user } = useUser();
+  const { user } = useUser(3);
   console.log(user);
   // Render
   return (
