@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 // src/components/UserProfile
 export default function UserProfile() {
-  // const user = null; // jsVariable
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(1);
 
   useEffect(() => {
     // AbortController
@@ -11,8 +11,8 @@ export default function UserProfile() {
     const signal = controller.signal;
 
     // declare
-    const fetchUser = () => {
-      fetch('https://jsonplaceholder.typicode.com/users/1', { signal })
+    const fetchUser = (id) => {
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`, { signal })
         .then((res) => res.json())
         .then((data) => {
           console.log('Fetch Success');
@@ -22,13 +22,13 @@ export default function UserProfile() {
     };
     // Execute + Delay
 
-    fetchUser();
+    fetchUser(userId);
 
     // CleanUp
     return () => {
-      controller.abort("I'm Dead");
+      controller.abort('I got new userId');
     };
-  }, []);
+  }, [userId]);
 
   // write you code for fetchUser
   return (
@@ -41,6 +41,9 @@ export default function UserProfile() {
       ) : (
         <h1>Loading.....</h1>
       )}
+      <button className='btn-reset' onClick={() => setUserId((p) => p + 1)}>
+        next person
+      </button>
     </div>
   );
 }
