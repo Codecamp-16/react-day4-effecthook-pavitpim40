@@ -6,17 +6,25 @@ function PostItem() {
   const [postId, setPostId] = useState(1);
 
   const fetchPostById = (id) => {
+    console.log('START FETCH');
+
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setPost(data);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    fetchPostById(postId);
+    let timeOutId = setTimeout(() => {
+      fetchPostById(postId);
+    }, 5000);
+
+    // Cleanup
+    return () => {
+      clearTimeout(timeOutId);
+    };
   }, [postId]);
 
   return (
