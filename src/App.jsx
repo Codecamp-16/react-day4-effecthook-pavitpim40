@@ -1,20 +1,11 @@
-import React, { useState } from 'react';
-import Counter from './components/Counter';
+import { useEffect } from 'react';
+// App.jsx
+export default function App() {
+  useEffect(() => {
+    alert('After render');
+  }, []);
 
-function App() {
-  const [isShow, setIsShow] = useState(false);
-
-  const handleToggle = () => {
-    setIsShow((p) => !p);
-  };
-  return (
-    <>
-      <button className='btn-reset' onClick={handleToggle}>
-        toggle show
-      </button>
-      {isShow ? <Counter /> : null}
-    </>
-  );
+  alert('Before render');
+  // สิ่งที่ FC Return == สิ่งที่ Render
+  return <main>Hello, React</main>;
 }
-
-export default App;
