@@ -1,21 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import PostItem from './components/PostItem';
+// App.jsx
+import { useEffect, useState } from 'react';
 
-function App() {
-  const [isShow, setIsShow] = useState(false);
-  const [postId, setPostId] = useState(1);
-
+export default function App() {
+  const [user, setUser] = useState(null);
+  const fetchUser = () => {
+    // task-1 เขียนโค้ดสำหรับ Fetch user จาก https://jsonplaceholder.typicode.com/users/1
+    // task-2 นำข้อมูลที่ได้จากการ Fetch มาอัพเดท user state
+    // task-3 นำฟังก์ชัน fetchUser ไป binding กับ ปุ่ม
+    // task-4 ลองดูผลลัพธ์ผ่าน browser + อธิบาย code ให้ตัวเองเข้าใจ
+    fetch(`https://jsonplaceholder.typicode.com/users/1`)
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+        setUser(data);
+      });
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
-    <div>
-      <button className='btn-primary' onClick={() => setIsShow((p) => !p)}>
-        toggle post
-      </button>
-      <button className='btn-primary bg-red-400' onClick={() => setPostId((p) => p + 1)}>
-        next post
-      </button>
-      {isShow ? <PostItem postId={postId} /> : null}
-    </div>
+    <main>
+      {user ? (
+        <>
+          <h1>{user.name}</h1>
+          <h2>{user.email}</h2>
+        </>
+      ) : (
+        <h1>Loading.....</h1>
+      )}
+      {/* <button onClick={fetchUser} className='btn-primary'>
+        fetch user
+      </button> */}
+    </main>
   );
 }
-
-export default App;
