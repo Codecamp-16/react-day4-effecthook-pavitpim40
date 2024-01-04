@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Counter from './components/Counter';
 
 function App() {
-  const [count, setCount] = React.useState(0);
-  // จังหวะ render => return ตัว virtual dom(JSX)
-  // virtual dom == JSX == JS Object
+  const [isShow, setIsShow] = useState(false);
+
+  const handleToggle = () => {
+    setIsShow((p) => !p);
+  };
   return (
     <>
-      <h1>Hello world! {count}</h1>
-      <button onClick={() => setCount(count + 1)}>add</button>
+      <button className='btn-reset' onClick={handleToggle}>
+        toggle show
+      </button>
+      {isShow ? <Counter /> : null}
     </>
   );
 }
