@@ -1,5 +1,6 @@
 import React from 'react';
 import useUser from './useUser';
+import useResource from './useResource';
 
 // Custom Hook
 // 1.แยก Logic ออกจาก UI
@@ -8,7 +9,8 @@ import useUser from './useUser';
 function App() {
   // ตัว App กำลัง subscribe ค่า user จาก useUser
   const { user } = useUser(3);
-  console.log(user);
+  const data = useResource('todos/40');
+  console.log(data);
   // Render
   return (
     <main>
