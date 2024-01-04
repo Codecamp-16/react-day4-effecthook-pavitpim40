@@ -1,14 +1,10 @@
 import React from 'react';
 
 function App() {
-  const [count, setCount] = React.useState(0);
-  // จังหวะ render => return ตัว virtual dom(JSX)
-  // virtual dom == JSX == JS Object
   return (
-    <>
-      <h1>Hello world! {count}</h1>
-      <button onClick={() => setCount(count + 1)}>add</button>
-    </>
+    <h1 className='text-3xl italic text-green-500 font-bold underline underline-offset-4'>
+      Hello, React
+    </h1>
   );
 }
 
