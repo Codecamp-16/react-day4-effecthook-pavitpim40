@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   // state
   const [allPosts, setAllPosts] = useState([]);
+
+  useEffect(() => {
+    // setTimeout(() => {
+    //   fetchData();
+    // }, 3000);
+
+    fetchData();
+  }, []);
 
   // handle Function
   const fetchData = () => {
@@ -12,7 +20,10 @@ function App() {
         console.log('data', data);
         setAllPosts(data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setAllPosts([]);
+      });
   };
 
   const postRender = allPosts.map((post) => (
@@ -22,17 +33,7 @@ function App() {
     </div>
   ));
 
-  return (
-    <div>
-      <button
-        className='p-2 border-2 border-sky-800 rounded-md hover:bg-sky-800 hover:text-white shadow-lg'
-        onClick={fetchData}
-      >
-        fetch Data
-      </button>
-      {allPosts.length > 0 ? postRender : null}
-    </div>
-  );
+  return <div>{allPosts.length > 0 ? postRender : <h1>Loading...</h1>}</div>;
 }
 
 export default App;
