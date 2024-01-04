@@ -3,16 +3,11 @@ import { useState } from 'react';
 import UserProfile from './components/UserProfile';
 
 export default function App() {
-  const [isShow, setIsShow] = useState(false);
+  const [userId, setUserId] = useState(1);
   return (
     <main>
-      <button 
-      className='btn-primary'
-      onClick={() => setIsShow((cur) => !cur)}
-      >
-        show profile
-      </button>
-      {isShow ? <UserProfile /> : null}
+      <UserProfile userId={userId} />
+      <button onClick={() => setUserId((p) => p + 1)}>next person</button>
     </main>
   );
 }
